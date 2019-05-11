@@ -1,12 +1,12 @@
 FROM node:10
 
-LABEL version="0.0.1"
-LABEL repository="https://github.com/alexlafroscia/actions-ember"
-LABEL homepage="https://github.com/alexlafroscia/actions-ember"
+LABEL version="1.0.0"
+LABEL repository="https://github.com/alexlafroscia/actions-ember-testing"
+LABEL homepage="https://github.com/alexlafroscia/actions-ember-testing"
 LABEL maintainer="Alex LaFroscia <alex@lafroscia.com>"
 
-LABEL com.github.actions.name="GitHub Action for Ember"
-LABEL com.github.actions.description="Wraps the Ember CLI to enable common yarn commands."
+LABEL com.github.actions.name="GitHub Action for Ember Testing"
+LABEL com.github.actions.description="Provides an environment for running Ember tests"
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="orange"
 
