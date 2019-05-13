@@ -10,7 +10,7 @@ LABEL com.github.actions.description="Provides an environment for running Ember 
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="orange"
 
-# Borrowed from ianwalter/puppeterr
+# Borrowed from ianwalter/puppeteer
 RUN  apt-get update \
   # See https://crbug.com/795759
   && apt-get install -yq libgconf-2-4 \
