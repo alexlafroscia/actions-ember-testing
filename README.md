@@ -4,18 +4,16 @@
 
 This GitHub Action provides a Node 10 environment and Headless Chrome, so you can run your Ember tests in GitHub Actions.
 
-A basic workflow looks something like this:
+![Example Workflow](docs/workflow-parallel-linting.png)
 
-![Example Workflow](docs/workflow-screenshot.png)
+## Super Quick Start
+
+Want to get started quick? Define a `.github/main.workflow` like this:
 
 ```hcl
 workflow "Build and Test" {
   on = "push"
-  resolves = [
-    "Lint Handlebars",
-    "Lint JavaScript",
-    "Run Tests",
-  ]
+  resolves = ["Run Tests"]
 }
 
 action "Install Dependencies" {
@@ -23,43 +21,20 @@ action "Install Dependencies" {
   args = "install"
 }
 
-action "Lint Handlebars" {
-  uses = "nuxt/actions-yarn@node-10"
-  needs = ["Install Dependencies"]
-  args = "lint:hbs"
-}
-
-action "Lint JavaScript" {
-  uses = "nuxt/actions-yarn@node-10"
-  needs = ["Install Dependencies"]
-  args = "lint:js"
-}
-
 action "Run Tests" {
   uses = "alexlafroscia/actions-ember-testing@master"
-  needs = ["Lint Handlebars", "Lint JavaScript"]
-  args = "test"
+  needs = ["Install Dependencies"]
 }
 ```
 
-What this would do is:
-
-1. Install your dependencies using `yarn`
-2. Run linting in parallel
-   1. Run `yarn lint:js`
-   1. Run `yarn lint:hbs`
-3. Run `ember test` if linting passed
-
-Each step is only completed if the previous tasks succeed.
-
-## Differences from Travis CI
-
-Using GitHub Actions differs a bit from the experience of using Travis CI. Changes that you make to the environment are persisted between actions, which allows you to break up each part of your process into a separate step while building on top of the previous ones.
-
-To recreate the workflow above in Travis CI, you'd need to use their Build Stage feature, which allows you to run multiple separate steps independently from one another. However, because each step is isolated, each of them would need to install their own dependencies rather than getting to share the same set. This allows GitHub Actions to run a lot faster than Travis CI; you only need to install your dependencies once.
+Want to know more or a more advanced configuration? Check out the [wiki][wiki]!
 
 ## Projects Using this Action
 
 If you want help setting this up for your own projects, you can check out the following projects which leverage this Action.
 
 - [`ember-steps`](https://github.com/alexlafroscia/ember-steps)
+
+Want to add your project to the list? Feel free to send a PR!
+
+[wiki]: https://github.com/alexlafroscia/actions-ember-testing/wiki
